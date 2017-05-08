@@ -1,0 +1,16 @@
+<div class="cart">
+    <h2>{% trans %}Shopping cart{% endtrans %}</h2>
+    {% if products %}
+        <ul class="products">
+            {% for product in products %}
+                <li>
+                    {{ product.qty }}x {{ product.label }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <a href="#" class="button">Order products</a>
+    {% else %}
+        No products
+    {% endif %}
+</div>

@@ -1,0 +1,7 @@
+imd_shop.discount.settings:
+  path: '/admin/config/imd_shop/discount'
+  defaults:
+    _form: '\Drupal\imd_shop\Form\DiscountConfigForm'
+    _title: 'Discount settings'
+  requirements:
+    _permission: 'administer site configuration'

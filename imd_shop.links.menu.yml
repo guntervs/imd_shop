@@ -1,0 +1,10 @@
+imd_shop.admin:
+  title: 'IMD Shop'
+  description: 'Settings for the IMD Shop'
+  route_name: imd_shop.discount.settings
+  parent: system.admin_config
+imd_shop.admin.discounts:
+  title: 'Discounts'
+  description: 'Discount settings'
+  route_name: imd_shop.discount.settings
+  parent: imd_shop.admin

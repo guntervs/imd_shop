@@ -1,0 +1,23 @@
+<?php // imd_shop/imd_shop.module
+
+/**
+ * Implements hook_theme().
+ */
+function imd_shop_theme($existing, $type, $theme, $path) {
+  $hooks = [];
+
+  $hooks['discount_information'] = [
+    'variables' => [
+      'minimum_amount' => 0,
+      'discount' => 0,
+    ],
+  ];
+
+  $hooks['shopping_cart'] = [
+    'variables' => [
+      'products' => [],
+    ],
+  ];
+
+  return $hooks;
+}
