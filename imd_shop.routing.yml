@@ -5,3 +5,27 @@ imd_shop.discount.settings:
     _title: 'Discount settings'
   requirements:
     _permission: 'administer site configuration'
+
+imd_shop.sw:
+  path: '/sw'
+  defaults:
+    _controller: '\Drupal\imd_shop\Controller\StarWarsController::root'
+    _title: 'Star Wars API'
+  requirements:
+    _permission: 'access content'
+
+imd_shop.sw.resource_list:
+  path: '/sw/{resource}'
+  defaults:
+    _controller: '\Drupal\imd_shop\Controller\StarWarsController::resourceList'
+    _title: 'Star Wars API'
+  requirements:
+    _permission: 'access content'
+
+imd_shop.sw.resource_item:
+  path: '/sw/{resource}/{id}'
+  defaults:
+    _controller: '\Drupal\imd_shop\Controller\StarWarsController::resourceItem'
+    _title: 'Star Wars API'
+  requirements:
+    _permission: 'access content'

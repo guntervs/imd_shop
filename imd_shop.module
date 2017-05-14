@@ -19,5 +19,11 @@ function imd_shop_theme($existing, $type, $theme, $path) {
     ],
   ];
 
+  $hooks['sw_root'] = [
+    'variables' => [
+      'resources' => [],
+    ],
+  ];
+
   return $hooks;
 }
