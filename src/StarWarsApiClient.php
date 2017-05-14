@@ -20,39 +20,48 @@ class StarWarsApiClient {
   }
 
   public function getRoot() {
-    /** @var Response $response */
-    $response = $this->http_client->get($this->baseURL);
-    $data = GuzzleHttp\json_decode((string) $response->getBody(), TRUE);
-
+    $data = $this->get();
     return array_keys($data);
   }
 
   public function getResourceList($resource) {
-    /** @var Response $response */
-    $response = $this->http_client->get($this->baseURL . $resource . '/');
-    $data = GuzzleHttp\json_decode((string) $response->getBody(), TRUE);
+    $path = $resource . '/';
+    $data = $this->get($path);
 
-    $list = $data['results'];
-    while ($data['next']) {
-      break;
-      /** @var Response $response */
-      $response = $this->http_client->get($data['next']);
-      $data = GuzzleHttp\json_decode((string) $response->getBody(), TRUE);
-      $list = array_merge($list, $data['results']);
+    foreach ($data as &$item) {
+      $item['id'] = preg_replace('/[^0-9]/', '', $item['url']);
     }
 
-    foreach ($list as &$resource) {
-      $resource['id'] = preg_replace('/[^0-9]/', '', $resource['url']);
-    }
-
-    return $list;
+    return $data;
   }
 
   public function getResourceItem($resource, $id) {
-    /** @var Response $response */
-    $response = $this->http_client->get($this->baseURL . $resource . '/' . $id);
-    $data = GuzzleHttp\json_decode((string) $response->getBody(), TRUE);
+    $path = $resource . '/' . $id;
+    $data = $this->get($path);
 
     return $data;
+  }
+
+  /**
+   * @param string $path
+   * @param array $results
+   * @return array
+   *   Response data
+   */
+  private function get($path = '', $results = []) {
+    /** @var Response $response */
+    $response = $this->http_client->get($this->baseURL . $path);
+    $data = GuzzleHttp\json_decode((string) $response->getBody(), TRUE);
+
+    if (!empty($data['results'])) {
+      $results = array_merge($results, $data['results']);
+    }
+
+    if (!empty($data['next'])) {
+      $path = str_replace($this->baseURL, '', $data['next']);
+      $results = $this->get($path, $results);
+    }
+
+    return !empty($data['results']) ? $results : $data;
   }
 }
