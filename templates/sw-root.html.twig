@@ -1,0 +1,7 @@
+<ul>
+    {% for resource in resources %}
+        <li>
+            <a href="{{ path('imd_shop.sw.resource_list', {'resource': resource}) }}">{{ resource | capitalize }}</a>
+        </li>
+    {% endfor %}
+</ul>
