@@ -1,3 +1,4 @@
 services:
   imd.starwars.client:
     class: Drupal\imd_shop\StarWarsApiClient
+    arguments: ['@http_client']

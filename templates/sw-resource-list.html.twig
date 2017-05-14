@@ -1,7 +1,7 @@
 <ul>
     {% for item in list %}
         <li>
-            <a href="{{ path('imd_shop.sw.resource_item', {'resource': resource, 'id': item.id}) }}">{{ item.name | capitalize }}</a>
+            <a href="{{ path('imd_shop.sw.resource_item', {'resource': resource, 'id': item.id}) }}">{{ item.name }}</a>
         </li>
     {% endfor %}
 </ul>

@@ -80,8 +80,9 @@ class StarWarsController extends ControllerBase {
    *   A render array as expected by the renderer.
    */
   public function resourceItem($resource = NULL, $id = NULL) {
+    $resource = $this->client->getResourceItem($resource, $id);
     $output = [
-      '#markup' => 'Resource: ' . $resource . ' - ID: ' . $id,
+      '#markup' => $resource['name'],
     ];
     return $output;
   }
